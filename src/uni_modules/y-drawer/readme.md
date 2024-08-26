@@ -2,11 +2,7 @@
 
 > 抽屉组件，仅支持 Vue3
 
-:::tip Tip
-
-[图2] 效果参考插件 [y-user-profile 微信小程序完善用户信息](https://ext.dcloud.net.cn/plugin?id=19510)
-
-:::
+[图2] 效果参考插件 [【Vue3】微信授权登录，用户信息设置，微信头像弹框](https://ext.dcloud.net.cn/plugin?id=19510)
 
 ## Example
 
@@ -83,8 +79,10 @@ setTimeout(() => {
 
 弹出层默认插槽里套个 `scroll-view` 实现，记得设置宽度和高度；
 
-## End
-
-> 结尾
+## 问题反馈
 
 若在使用过程中发现 BUG，请与我反馈，不胜感激。
+
+- [去 Github Issues](https://github.com/edk24/y-components/issues)
+- 评论区、插件群里
+- [发邮件 yuxiaobo64@gmail.com](mailto:yuxiaobo64@gmail.com)
