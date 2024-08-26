@@ -2,6 +2,8 @@
 
 > 抽屉组件，仅支持 Vue3
 
+- [查看演示](https://y-components.netlify.app/#/pages/drawer/index)
+
 [图2] 效果参考插件 [【Vue3】微信授权登录，用户信息设置，微信头像弹框](https://ext.dcloud.net.cn/plugin?id=19510)
 
 ## Example
