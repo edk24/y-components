@@ -5,6 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "drawer Test"
 			}
+		},
+		{
+			"path":"pages/user-profile/index",
+			"style": {
+				"navigationBarTitleText": "user-profile Test"
+			}
 		}
 	],
 	"globalStyle": {
