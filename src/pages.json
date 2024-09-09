@@ -11,6 +11,12 @@
 			"style": {
 				"navigationBarTitleText": "user-profile Test"
 			}
+		},
+		{
+			"path":"pages/bg-music/index",
+			"style":{
+				"navigationBarTitleText": "bg-music Test"
+			}
 		}
 	],
 	"globalStyle": {
