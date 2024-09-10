@@ -1,5 +1,5 @@
-import {  ref } from 'vue';
 import './style.scss'
+
 
 type PLAY_STATE = 'play' | 'pause';
 
@@ -32,7 +32,7 @@ export const useBgMusic = (options: BgMusicOptions) => {
         options.loop = 999;
     }
 
-    const musicLoadComplete = ref(false);
+    let musicLoadComplete = false;
     let musicInstance: any = null;
 
     // 动态加载音频库
@@ -40,7 +40,7 @@ export const useBgMusic = (options: BgMusicOptions) => {
         // 注册音频加载完成事件
         createjs.Sound.alternateExtensions = ['mp3'];
         createjs.Sound.on('fileload', () => {
-            musicLoadComplete.value = true;
+            musicLoadComplete = true;
         }, window);
 
         // 注册音频
@@ -90,7 +90,7 @@ export const useBgMusic = (options: BgMusicOptions) => {
 
         // 不存在音频实例，等待音频加载完成后播放
         const timer = setInterval(() => {
-            if (window.createjs && musicLoadComplete.value) {
+            if (window.createjs && musicLoadComplete) {
                 clearInterval(timer);
                 musicInstance = createjs.Sound.play('sound');
                 musicInstance.loop = options.loop;

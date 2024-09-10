@@ -12,6 +12,8 @@
 
 ## 使用
 
+**Vue2将下述代码放到首页 onLoad 中即可**
+
 ```vue
 <script lang="ts" setup>
 import { useBgMusic } from '@/uni_modules/y-bg-music/js_sdk';
