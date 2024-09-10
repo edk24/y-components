@@ -6,7 +6,7 @@
 
 ## 演示效果
 
-![alt text](https://y-components.edk24.com/y-bg-music/demo.png)
+![alt text](https://y-components.edk24.com/static/y-bg-music/demo.png)
 
 使用微信扫一扫查看效果
 
@@ -54,5 +54,5 @@ weixin.ready(() => {
 
 绿泡泡：Base1024
 
-![wx](https://y-components.edk24.com/y-bg-music/wx-qrcode.jpg)
+![wx](https://y-components.edk24.com/static/y-bg-music/wx-qrcode.jpg)
 
