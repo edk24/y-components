@@ -1,12 +1,14 @@
 {
   "id": "y-bg-music",
-  "displayName": "y-bg-music",
+  "displayName": "【Vue3】h5自动播放背景音乐，无需触摸点击",
   "version": "1.0.0",
-  "description": "y-bg-music",
+  "description": "使用微信内置浏览器打开，背景音乐将自动播放，无需人为干预",
   "keywords": [
-    "y-bg-music"
+    "y-bg-music",
+    "自动播放背景音乐",
+    "自动播放音乐"
 ],
-  "repository": "",
+  "repository": "https://github.com/edk24/y-components",
   "engines": {
     "HBuilderX": "^3.1.0"
   },
@@ -24,9 +26,9 @@
       "qq": ""
     },
     "declaration": {
-      "ads": "",
-      "data": "",
-      "permissions": ""
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "无"
     },
     "npmurl": ""
   },
@@ -35,46 +37,46 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u",
-        "alipay": "u"
+        "tcb": "y",
+        "aliyun": "y",
+        "alipay": "y"
       },
       "client": {
         "Vue": {
           "vue2": "u",
-          "vue3": "u"
+          "vue3": "y"
         },
         "App": {
-          "app-vue": "u",
-          "app-nvue": "u",
-          "app-uvue": "u"
+          "app-vue": "n",
+          "app-nvue": "n",
+          "app-uvue": "n"
         },
         "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
         },
         "H5-pc": {
-          "Chrome": "u",
-          "IE": "u",
-          "Edge": "u",
-          "Firefox": "u",
-          "Safari": "u"
+          "Chrome": "n",
+          "IE": "n",
+          "Edge": "n",
+          "Firefox": "n",
+          "Safari": "n"
         },
         "小程序": {
-          "微信": "u",
-          "阿里": "u",
-          "百度": "u",
-          "字节跳动": "u",
-          "QQ": "u",
-          "钉钉": "u",
-          "快手": "u",
-          "飞书": "u",
-          "京东": "u"
+          "微信": "n",
+          "阿里": "n",
+          "百度": "n",
+          "字节跳动": "n",
+          "QQ": "n",
+          "钉钉": "n",
+          "快手": "n",
+          "飞书": "n",
+          "京东": "n"
         },
         "快应用": {
-          "华为": "u",
+          "华为": "n",
           "联盟": "u"
         }
       }
