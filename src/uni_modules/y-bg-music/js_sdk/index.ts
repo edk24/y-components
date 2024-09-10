@@ -1,26 +1,37 @@
 import {  ref } from 'vue';
+import './style.scss'
 
 type PLAY_STATE = 'play' | 'pause';
 
+// soundjs loader
 const script = document.createElement('script');
 script.src = 'https://cdn.bootcdn.net/ajax/libs/SoundJS/1.0.2/soundjs.min.js';
 script.type = 'text/javascript';
 
+// 控制按钮
+const musicSvgImg = '<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="36px" height="36px" fill="#fff">    <path d="M 11 3 L 11 4 L 11 8 L 11 14.541016 A 4 4 0 0 0 9 14 A 4 4 0 0 0 5 18 A 4 4 0 0 0 9 22 A 4 4 0 0 0 13 18 L 13 8 L 19 8 L 19 3 L 11 3 z"/></svg>'
+const controlsDom = document.createElement('div');
+controlsDom.className = 'y-bg-music-controls';
+controlsDom.innerHTML = musicSvgImg
 
 type BgMusicOptions = {
     /** 音频文件 mp3 */
     src: string,
-    /** 声音 0.1 ~ 1 */
-    volume?: number
     /** 循环次数，默认 999 */
     loop?: number
+    /** 控制按钮 */
+    controls?: boolean
 }
 
-export const useBgMusic = (options: BgMusicOptions = {
-    src: '',
-    volume: 0.1,
-    loop: 999
-}) => {
+export const useBgMusic = (options: BgMusicOptions) => {
+    if (typeof options.controls === 'undefined') {
+        options.controls = true;
+    }
+
+    if (typeof options.loop === 'undefined') {
+        options.loop = 999;
+    }
+
     const musicLoadComplete = ref(false);
     let musicInstance: any = null;
 
@@ -38,6 +49,21 @@ export const useBgMusic = (options: BgMusicOptions = {
     // 预防重复加载
     if (script.parentElement === null) {
         document.body.appendChild(script);
+    }
+    if (controlsDom.parentElement === null) {
+        document.body.appendChild(controlsDom);
+
+        if (options.controls) {
+            controlsDom.classList.add('y-bg-music-controls__show');
+
+            controlsDom.onclick = () => {
+                if (getState() === 'play') {
+                    pause();
+                } else {
+                    play();
+                }
+            }
+        }
     }
     
     /** 获取播放状态 */
@@ -58,6 +84,7 @@ export const useBgMusic = (options: BgMusicOptions = {
         // 存在音频实例，直接恢复播放
         if (musicInstance) {
             musicInstance.paused = false;
+            controlsDom.classList.add('y-bg-music-controls__player');
             return;
         }
 
@@ -67,7 +94,7 @@ export const useBgMusic = (options: BgMusicOptions = {
                 clearInterval(timer);
                 musicInstance = createjs.Sound.play('sound');
                 musicInstance.loop = options.loop;
-                musicInstance.volume = options.volume;
+                controlsDom.classList.add('y-bg-music-controls__player');
             }
         }, 300);
     }
@@ -77,6 +104,8 @@ export const useBgMusic = (options: BgMusicOptions = {
      */
     function pause() {
         musicInstance.paused = true
+        controlsDom.classList.remove('y-bg-music-controls__player');
+
     }
 
     /**
@@ -85,6 +114,7 @@ export const useBgMusic = (options: BgMusicOptions = {
     function destroy() {
         musicInstance.stop();
         musicInstance = null;
+        controlsDom.classList.remove('y-bg-music-controls__show');
     }
 
     return {

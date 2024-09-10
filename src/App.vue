@@ -13,4 +13,8 @@ onHide(() => {
   console.log("App Hide");
 });
 </script>
-<style></style>
+<style>
+a {
+  text-decoration: none;
+}
+</style>

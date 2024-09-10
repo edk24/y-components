@@ -1,0 +1,40 @@
+.y-bg-music-controls {
+    --y-bg-music-controls-size: 80rpx;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+
+    position: fixed;
+    right: 20rpx;
+    top: 200rpx;
+    width: var(--y-bg-music-controls-size);
+    height: var(--y-bg-music-controls-size);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(9rpx);
+    -webkit-backdrop-filter: blur(9rpx);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    &__show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &__player {
+        animation: y-bg-music-rotate 3s linear infinite;
+    }
+}
+
+// 关键帧 旋转动画
+@keyframes y-bg-music-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
