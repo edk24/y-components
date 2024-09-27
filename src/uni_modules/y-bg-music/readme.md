@@ -16,6 +16,7 @@
 
 ```vue
 <script lang="ts" setup>
+import weixin from 'weixin-js-sdk'; // npm install weixin-js-sdk
 import { useBgMusic } from '@/uni_modules/y-bg-music/js_sdk';
 
 

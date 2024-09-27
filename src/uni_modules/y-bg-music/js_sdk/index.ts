@@ -65,7 +65,12 @@ export const useBgMusic = (options: BgMusicOptions) => {
             }
         }
     }
-    
+
+    // 触摸自动播放
+    document.addEventListener('touchend', () => {
+        play();
+    }, { once: true });
+
     /** 获取播放状态 */
     function getState():PLAY_STATE {
         if (!musicInstance) { 
