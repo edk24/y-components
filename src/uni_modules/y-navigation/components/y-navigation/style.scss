@@ -1,0 +1,68 @@
+.y-navigation {
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+
+    --y-navigation-bar-background: #456dea;
+    --y-navigation-bar-color: white;
+    --y-navigation-status-bar-height: var(--window-top);
+    --y-navigation-font-size: 30rpx;
+    --y-navigation-height: 44px;
+
+    &__fixed {
+        position: sticky;
+        top: 0;
+    }
+
+    &__status-bar {
+        width: 100%;
+        height: var(--y-navigation-status-bar-height);
+    }
+
+    &__native {
+        background: var(--y-navigation-bar-background);
+        color: var(--y-navigation-bar-color);
+        font-size: var(--y-navigation-font-size);
+    }
+
+    &__body {
+        display: flex;
+        box-sizing: border-box;
+        z-index: 9999;
+        position: relative;
+        align-items: center;
+        
+        // 兼容刘海屏
+        // padding-top: 0;
+        // padding-top: constant(safe-area-inset-top);
+        // padding-top: env(safe-area-inset-top);
+
+      
+        height: var(--y-navigation-height);
+
+
+        &-back {
+            width: 60rpx;
+            margin-left: 10rpx;
+            cursor: pointer;
+            margin-top: 5px;
+
+            .iconfont {
+                font-weight: 400 !important;
+                font-size: 40rpx;
+            }
+        }
+
+        &-title {
+            flex: 1;
+            font-weight: 400;
+            text-align: center;
+            color: var(--y-navigation-bar-color);
+            font-size: var(--y-navigation-font-size);
+        }
+
+        &-extend {
+            min-width: 70rpx;
+        }
+    }
+}

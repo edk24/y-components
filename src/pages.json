@@ -23,12 +23,19 @@
 			"style":{
 				"navigationBarTitleText": "bg-music Test"
 			}
+		},
+		{
+			"path": "pages/navigation/index",
+			"style": {
+			"navigationStyle": "custom",
+				"navigationBarTitleText": "navigation Test"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#456dea",
 		"backgroundColor": "#F8F8F8"
 	}
 }

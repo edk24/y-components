@@ -8,12 +8,12 @@
 </template>
 
 <script lang="ts" setup>
+// #ifdef H5
 import { useBgMusic } from '@/uni_modules/y-bg-music/js_sdk';
-import { ref } from 'vue';
+import {  ref } from 'vue';
 import weixin from 'weixin-js-sdk';
 
-const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent));
-
+const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent))
 
 const bgmusic = useBgMusic({
     src: 'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
@@ -34,6 +34,7 @@ weixin.config({
 weixin.ready(() => {
     bgmusic.play();
 });
+// #endif
 </script>
 
 <style lang="scss" scoped>

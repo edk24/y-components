@@ -1,11 +1,12 @@
 {
   "id": "y-navigation",
-  "displayName": "y-navigation 自定义导航栏",
-  "version": "1.0.1",
-  "description": "y-navigation 自定义导航栏，支持小程序 app h5",
+  "displayName": "y-navigation 小程序导航栏",
+  "version": "1.0.2",
+  "description": "y-navigation 小程序导航栏, 透明, 渐变导航栏",
   "keywords": [
     "y-navigation",
-    "自定义导航栏"
+    "小程序导航栏",
+    "渐变导航栏"
 ],
   "repository": "",
   "engines": {
@@ -54,16 +55,16 @@
         },
         "H5-mobile": {
           "Safari": "y",
-          "Android Browser": "y",
-          "微信浏览器(Android)": "y",
-          "QQ浏览器(Android)": "y"
+          "Android Browser": "n",
+          "微信浏览器(Android)": "n",
+          "QQ浏览器(Android)": "n"
         },
         "H5-pc": {
           "Chrome": "y",
           "IE": "n",
-          "Edge": "y",
-          "Firefox": "y",
-          "Safari": "y"
+          "Edge": "n",
+          "Firefox": "n",
+          "Safari": "n"
         },
         "小程序": {
           "微信": "y",

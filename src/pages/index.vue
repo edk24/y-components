@@ -1,9 +1,9 @@
 <template>
     <view class="card-container">
-        <router-link class="card" v-for="(item, i) in items" :key="i" :to="item.to">
+        <navigator class="card" v-for="(item, i) in items" :key="i" :url="item.to">
             <view class="card-title">{{ item.title }}</view>
             <view class="card-desc">{{ item.desc }}</view>
-        </router-link>
+        </navigator>
     </view>
 
     <view class="about">
@@ -19,9 +19,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
-const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent));
+const isWxBrowser = computed(() => {
+    // #ifdef MP-WEIXIN
+    return false;
+    // #endif
+
+    return /micromessenger/i.test(navigator.userAgent)
+});
 
 const items = ref([
     {
@@ -34,11 +40,17 @@ const items = ref([
         desc: 'y-user-profile',
         to: '/pages/user-profile/index'
     },
+    // #ifdef H5
     {
         title: 'H5自动背景音乐',
         desc: 'y-bg-music',
         to: '/pages/bg-music/index'
-
+    },
+    // #endif
+    {
+        title: '自定义小程序导航栏',
+        desc: 'y-navigation',
+        to: '/pages/navigation/index'
     }
 ])
 </script>

@@ -29,3 +29,34 @@ export function compareVersion(version: string): number {
 
     return 0
 }
+
+
+/**
+ * 获取导航栏信息
+ */
+export function getNavigationBarInfo() {
+    const statusBarHeight = getStatusBarHeight()
+
+    const menuButtonInfo = wx.getMenuButtonBoundingClientRect()
+    console.log((menuButtonInfo.height  + menuButtonInfo.bottom) - statusBarHeight - menuButtonInfo.top)
+
+    return {
+        statusBarHeight,
+        navigationHeight: (menuButtonInfo.top - statusBarHeight) * 2 + menuButtonInfo.height 
+    }
+}
+
+
+function getStatusBarHeight() {
+    // #ifndef MP-WEIXIN
+    return uni.getWindowInfo().statusBarHeight || 1;
+    // #endif
+
+    // #ifdef MP-WEIXIN
+    if (compareVersion('2.20.1') >= 0) {            // 2.20.1 以上版本支持
+        return uni.getWindowInfo().statusBarHeight;
+    } else {
+        return uni.getSystemInfoSync().statusBarHeight || 0;
+    }
+    // #endif
+}
