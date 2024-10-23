@@ -14,13 +14,18 @@ import {  ref } from 'vue';
 import weixin from 'weixin-js-sdk';
 
 const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent))
+let bgmusic: any = null;
+try {
+    bgmusic = useBgMusic({
+        src: 'https://bate.www.ioi.plus/music.m4a',
+        // src: 'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
+        loop: 999,
+        controls: true
+    });
+} catch (error:any) {
+    alert(error.message  | error.msg | error)
+}
 
-const bgmusic = useBgMusic({
-    src: 'https://y-components.netlify.app/static/bgmusic.mp3',
-    // src:'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
-    loop: 999,
-    controls: true
-});
 
 // 留空也要调用一下，否则无法自动播放
 weixin.config({
