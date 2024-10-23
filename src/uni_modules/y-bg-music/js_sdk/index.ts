@@ -23,6 +23,129 @@ type BgMusicOptions = {
     controls?: boolean
 }
 
+
+interface IBgMusic {
+    init: (options: BgMusicOptions) => void
+    /** 获取播放状态 */
+    getState: () => PLAY_STATE
+    /** 播放 */
+    play: () => void
+    /** 暂停 */
+    pause: () => void
+    /** 销毁 */
+    destroy: () => void
+}
+
+
+class BgMusicAndroid implements IBgMusic {
+
+    private musicInstance: any = null;
+    private musicLoadComplete = false;
+    private options: BgMusicOptions | null = null;
+
+    init(options: BgMusicOptions) {
+        this.options = options;
+
+        // 动态加载音频库
+        script.onload = () => {
+            // 注册音频加载完成事件
+            createjs.Sound.alternateExtensions = ['mp3', 'm4a', 'ogg', 'wav', 'mp4'];
+            createjs.Sound.on('fileload', () => {
+                this.musicLoadComplete = true;
+            }, window);
+            createjs.Sound.on('fileerror', (e) => {
+                throw new Error(`[y-bg-music] 音频加载失败: ${e.src}`);
+            }, window);
+
+            // 注册音频
+            createjs.Sound.registerSound(options.src, 'sound');
+        }
+        // 预防重复加载
+        if (script.parentElement === null) {
+            document.body.appendChild(script);
+        }
+    }
+
+
+    play() {
+        // 存在音频实例，直接恢复播放
+        if (this.musicInstance) {
+            this.musicInstance.paused = false;
+            controlsDom.classList.add('y-bg-music-controls__player');
+            return;
+        }
+
+        // 不存在音频实例，等待音频加载完成后播放
+        const timer = setInterval(() => {
+            if (window.createjs && this.musicLoadComplete) {
+                clearInterval(timer);
+                this.musicInstance = createjs.Sound.play('sound');
+                this.musicInstance.loop = this.options?.loop;
+                controlsDom.classList.add('y-bg-music-controls__player');
+            }
+        }, 300);
+    }
+
+    pause() {
+        this.musicInstance.paused = true
+        controlsDom.classList.remove('y-bg-music-controls__player');
+    }
+
+    destroy() {
+        this.musicInstance.stop();
+        this.musicInstance = null;
+        controlsDom.classList.remove('y-bg-music-controls__show');
+    }
+
+    getState() {
+        if (!this.musicInstance) {
+            return 'pause';
+        }
+
+        return this.musicInstance.paused ? 'pause' : 'play';
+    }
+}
+
+
+class BgMusicIos implements IBgMusic {
+
+    private audioDom: HTMLAudioElement | null = null;
+
+    init(options: BgMusicOptions) {
+        this.audioDom = document.createElement('audio');
+        this.audioDom.src = options.src;
+        this.audioDom.loop = true;
+        this.audioDom.preload = 'auto';
+        this.audioDom.id = 'y-bg-music-audio';
+        document.body.appendChild(this.audioDom);
+    }
+
+    play() {
+        this.audioDom?.play();
+        controlsDom.classList.add('y-bg-music-controls__player');
+    }
+
+    pause() {
+        this.audioDom?.pause();
+        controlsDom.classList.remove('y-bg-music-controls__player');
+    }
+
+    destroy() {
+        this.audioDom?.pause();
+        this.audioDom?.remove();
+        controlsDom.classList.remove('y-bg-music-controls__show');
+    }
+
+    getState() {
+        if (!this.audioDom) {
+            return 'pause';
+        }
+
+        return this.audioDom.paused ? 'pause' : 'play';
+    }
+}
+
+
 export const useBgMusic = (options: BgMusicOptions) => {
     if (typeof options.controls === 'undefined') {
         options.controls = true;
@@ -32,24 +155,19 @@ export const useBgMusic = (options: BgMusicOptions) => {
         options.loop = 999;
     }
 
-    let musicLoadComplete = false;
-    let musicInstance: any = null;
-
-    // 动态加载音频库
-    script.onload = () => {
-        // 注册音频加载完成事件
-        createjs.Sound.alternateExtensions = ['mp3'];
-        createjs.Sound.on('fileload', () => {
-            musicLoadComplete = true;
-        }, window);
-
-        // 注册音频
-        createjs.Sound.registerSound(options.src, 'sound');
+    let player: IBgMusic | null = null;
+    if (isAndroid()) {
+        player = new BgMusicAndroid();
+        player.init(options);
+    } else if (isIos()) {
+        player = new BgMusicIos();
+        player.init(options);
+    } else {
+        throw new Error('[y-bg-music] 不支持的设备');
     }
-    // 预防重复加载
-    if (script.parentElement === null) {
-        document.body.appendChild(script);
-    }
+
+
+    // 控制按钮
     if (controlsDom.parentElement === null) {
         document.body.appendChild(controlsDom);
 
@@ -57,10 +175,10 @@ export const useBgMusic = (options: BgMusicOptions) => {
             controlsDom.classList.add('y-bg-music-controls__show');
 
             controlsDom.onclick = () => {
-                if (getState() === 'play') {
-                    pause();
+                if (player.getState() === 'play') {
+                    player.pause();
                 } else {
-                    play();
+                    player.play();
                 }
             }
         }
@@ -68,64 +186,20 @@ export const useBgMusic = (options: BgMusicOptions) => {
 
     // 触摸自动播放
     document.addEventListener('touchend', () => {
-        play();
+        player.play();
     }, { once: true });
 
-    /** 获取播放状态 */
-    function getState():PLAY_STATE {
-        if (!musicInstance) { 
-            return 'pause';
-        }
 
-        return musicInstance.paused ? 'pause' : 'play';
-    }
+    return player
+}
 
-    /**
-     * 播放
-     * 
-     * 请放到 wx.ready 回调中调用
-     */
-    function play() {
-        // 存在音频实例，直接恢复播放
-        if (musicInstance) {
-            musicInstance.paused = false;
-            controlsDom.classList.add('y-bg-music-controls__player');
-            return;
-        }
 
-        // 不存在音频实例，等待音频加载完成后播放
-        const timer = setInterval(() => {
-            if (window.createjs && musicLoadComplete) {
-                clearInterval(timer);
-                musicInstance = createjs.Sound.play('sound');
-                musicInstance.loop = options.loop;
-                controlsDom.classList.add('y-bg-music-controls__player');
-            }
-        }, 300);
-    }
+function isAndroid() {
+    const u = navigator.userAgent;
+    return u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+}
 
-    /**
-     * 暂停
-     */
-    function pause() {
-        musicInstance.paused = true
-        controlsDom.classList.remove('y-bg-music-controls__player');
-
-    }
-
-    /**
-     * 销毁
-     */
-    function destroy() {
-        musicInstance.stop();
-        musicInstance = null;
-        controlsDom.classList.remove('y-bg-music-controls__show');
-    }
-
-    return {
-        getState,
-        play,
-        pause,
-        destroy
-    }
+function isIos() {
+    const u = navigator.userAgent;
+    return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 }
