@@ -21,7 +21,7 @@ import { useBgMusic } from '@/uni_modules/y-bg-music/js_sdk';
 
 
 const bgmusic = useBgMusic({
-    src: 'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
+    src: 'https://doc.edk24.com/music.mp3',
     loop: 999,      // 循环次数
     controls:true   // 显示右上角控制元素
 });
