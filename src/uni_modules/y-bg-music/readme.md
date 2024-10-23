@@ -1,8 +1,13 @@
 # y-bg-music 自动播放背景音乐
 
-仅微信内置浏览器支持，进入页面自动播放。无需“触摸、点击”之类的操作。
+**兼容性**
 
-使用简单
+| 移动端浏览器 | Ios微信内置浏览器 | Android内置浏览器 |
+| :---: | :---: | :---: |
+| 触摸任意地方播放 | ✅ 自动播放 | ✅ 自动播放 |
+
+
+微信内置浏览器打开链接, 自动播放  无需有任何动作
 
 ## 演示效果
 
@@ -12,7 +17,7 @@
 
 ## 使用
 
-**Vue2将下述代码放到首页 onLoad 中即可**
+**`Vue2` 将下述代码放到首页 onLoad 中即可**
 
 ```vue
 <script lang="ts" setup>
@@ -21,9 +26,9 @@ import { useBgMusic } from '@/uni_modules/y-bg-music/js_sdk';
 
 
 const bgmusic = useBgMusic({
-    src: 'https://doc.edk24.com/music.mp3',
+    src: 'https://y-components.netlify.app/static/bgmusic.mp3',
     loop: 999,      // 循环次数
-    controls:true   // 显示右上角控制元素
+    controls:true   // 显示右上角控制元素 (可以隐藏自己实现)
 });
 
 
@@ -56,6 +61,8 @@ weixin.ready(() => {
 ## 意见反馈、联系我
 
 绿泡泡：Base1024
+
+有问题请反馈, 此 jssdk 持续维护中.
 
 ![wx](https://y-components.edk24.com/static/y-bg-music/wx-qrcode.jpg)
 

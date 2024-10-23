@@ -1,12 +1,13 @@
 {
   "id": "y-bg-music",
-  "displayName": "微信H5自动播放背景音乐，无需触摸点击",
-  "version": "1.0.2",
-  "description": "使用微信内置浏览器打开，背景音乐将自动播放，无需人为干预",
+  "displayName": "微信H5自动背景音乐，无需触摸点击",
+  "version": "1.0.3",
+  "description": "使用微信内置浏览器打开，背景音乐将自动播放，无需任何操作",
   "keywords": [
     "y-bg-music",
     "自动播放背景音乐",
-    "自动播放音乐"
+    "自动播放音乐",
+    "h5"
 ],
   "repository": "https://github.com/edk24/y-components",
   "engines": {
@@ -77,7 +78,7 @@
         },
         "快应用": {
           "华为": "n",
-          "联盟": "u"
+          "联盟": "n"
         }
       }
     }
