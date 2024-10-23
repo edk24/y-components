@@ -2,7 +2,7 @@
     <view class="example">
         <view>来个演示</view>
         <button @tap="drawerRef.open()">打开抽屉</button>
-        <y-drawer ref="drawerRef" :length="500" title="授权用户资料">
+        <y-drawer ref="drawerRef" :length="500" title="授权用户资料" >
             测试
         </y-drawer>
     </view>

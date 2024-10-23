@@ -22,11 +22,11 @@
 import { computed, ref } from 'vue';
 
 const isWxBrowser = computed(() => {
-    // #ifdef MP-WEIXIN
-    return false;
-    // #endif
-
+    // #ifdef H5
     return /micromessenger/i.test(navigator.userAgent)
+    // #endif
+    
+    return false;
 });
 
 const items = ref([
