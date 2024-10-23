@@ -30,8 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
     direction: 'bottom',
     length: 200,
     closeIcon: 'closeempty',
-    title: '',
-    closeBefore: () => { return true }
+    title: ''
 })
 
 const emit = defineEmits(['close'])
@@ -43,7 +42,12 @@ function handleMaskClose() {
 }
 
 function handleClose() {
-    if (props.closeBefore()) {
+    if (typeof props.closeBefore == 'function') {
+        if (props.closeBefore()) {
+            close()
+            emit('close')
+        }
+    } else {
         close()
         emit('close')
     }
