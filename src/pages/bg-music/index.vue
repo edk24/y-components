@@ -16,8 +16,8 @@ import weixin from 'weixin-js-sdk';
 const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent))
 
 const bgmusic = useBgMusic({
-    src: 'https://y-components.netlify.app/static/bgmusic.mp3',
-    // src:'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
+    // src: 'https://y-components.netlify.app/static/bgmusic.mp3',
+    src:'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
     loop: 999,
     controls: true
 });
