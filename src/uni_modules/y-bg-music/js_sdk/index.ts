@@ -47,6 +47,10 @@ class BgMusicAndroid2 implements IBgMusic {
             this.soundLoadComplete = true;
             this.backgroundMusicInstance = createjs.Sound.play('sound');
         }, this);
+        this.queue.on('error', (e: any) => {
+            console.error(`[y-bg-music] 音频加载失败: ${e.src}`, e);
+            throw new Error(`[y-bg-music] 音频加载失败: ${e.src}`);
+        })
         this.queue.loadFile({
             id: 'sound',
             src: options.src,
