@@ -20,7 +20,22 @@
 import { getNavigationBarInfo } from './utils';
 import { computed } from 'vue';
 
-const navigationBarInfo = getNavigationBarInfo()
+let navigationBarInfo = {
+    statusBarHeight: 0,
+    navigationHeight: 44
+}
+
+// #ifdef MP
+navigationBarInfo = getNavigationBarInfo()
+// #endif
+
+// #ifdef APP-PLUS
+navigationBarInfo = {
+    statusBarHeight: uni.getWindowInfo().statusBarHeight || 0,
+    navigationHeight: 44
+}
+// #endif
+
 
 interface Props {
     // 是否显示返回按钮

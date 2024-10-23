@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     background-color: blue;
+    z-index: 9999;
 
     --y-navigation-bar-background: #456dea;
     --y-navigation-bar-color: white;
@@ -45,7 +46,9 @@
             width: 60rpx;
             margin-left: 10rpx;
             cursor: pointer;
+            // #ifdef MP
             margin-top: 5px;
+            // #endif
 
             .iconfont {
                 font-weight: 400 !important;
@@ -55,7 +58,14 @@
 
         &-title {
             flex: 1;
+            // #ifdef MP
             font-weight: 400;
+            // #endif
+
+            // #ifndef MP
+            font-weight: bold;
+            // #endif
+
             text-align: center;
             color: var(--y-navigation-bar-color);
             font-size: var(--y-navigation-font-size);

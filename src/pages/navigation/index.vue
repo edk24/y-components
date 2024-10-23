@@ -11,7 +11,7 @@
         </y-navigation> -->
         
         <view class="img">
-            <image src="./images/img.png" mode="widthFix"></image>
+            <image src="./images/img.png" mode="widthFix" ></image>
             <text>什么也没有~</text>
         </view>
     </view>

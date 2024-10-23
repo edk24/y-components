@@ -5,7 +5,15 @@
  * @returns >= 0 表示当前版本大于等于对比版本，< 0 表示当前版本小于对比版本
  */
 export function compareVersion(version: string): number {
-    const v1 = uni.getAppBaseInfo().SDKVersion.split('.')
+    let v1 = [];
+
+    // 获取微信小程序基础库版本
+    try {
+        v1 = uni.getAppBaseInfo().SDKVersion.split('.') // > 2.20.1
+    } catch (e) {
+        v1 = uni.getSystemInfoSync().SDKVersion.split('.') // > 1.9.6
+    }
+
     const v2 = version.split('.')
     const len = Math.max(v1.length, v2.length)
 
@@ -37,8 +45,7 @@ export function compareVersion(version: string): number {
 export function getNavigationBarInfo() {
     const statusBarHeight = getStatusBarHeight()
 
-    const menuButtonInfo = wx.getMenuButtonBoundingClientRect()
-    console.log((menuButtonInfo.height  + menuButtonInfo.bottom) - statusBarHeight - menuButtonInfo.top)
+    const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
 
     return {
         statusBarHeight,
