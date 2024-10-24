@@ -36,58 +36,6 @@ interface IBgMusic {
     destroy: () => void
 }
 
-class BgMusicAndroid2 implements IBgMusic {
-    private soundLoadComplete: boolean = false;
-    private backgroundMusicInstance: any = null;
-    private queue: any = null;
-    init(options: BgMusicOptions) {
-        this.queue = new createjs.LoadQueue(true);
-        this.queue.installPlugin(createjs.Sound);
-        this.queue.on('complete',  () => {
-            this.soundLoadComplete = true;
-            this.backgroundMusicInstance = createjs.Sound.play('sound');
-        }, this);
-        this.queue.on('error', (e: any) => {
-            console.error(`[y-bg-music] 音频加载失败: ${e.src}`, e);
-            throw new Error(`[y-bg-music] 音频加载失败: ${e.src}`);
-        })
-        this.queue.loadFile({
-            id: 'sound',
-            src: options.src,
-        });
-    }
-
-    play() {
-        if (this.backgroundMusicInstance) {
-            this.backgroundMusicInstance.paused = false;
-        } else {
-            const timer = setInterval(() => {
-                if (this.soundLoadComplete) {
-                    clearInterval(timer);
-                    this.backgroundMusicInstance = createjs.Sound.play('sound');
-                }
-            }, 300);
-        }
-    }
-
-    pause() {
-        this.backgroundMusicInstance.paused = true;
-    }
-
-    destroy() {
-        this.backgroundMusicInstance.stop();
-        this.backgroundMusicInstance = null;
-    }
-
-    getState() {
-        if (!this.backgroundMusicInstance) {
-            return 'pause';
-        }
-
-        return this.backgroundMusicInstance.paused ? 'pause' : 'play';
-    }
-}
-
 class BgMusicAndroid implements IBgMusic {
 
     private musicInstance: any = null;
@@ -106,8 +54,6 @@ class BgMusicAndroid implements IBgMusic {
                 this.musicLoadComplete = true;
             }, this);
             createjs.Sound.on('fileerror', (e:any) => {
-                console.error(`[y-bg-music] 音频加载失败: ${e.src}`, e);
-                console.log(JSON.stringify(e));
                 throw new Error(`[y-bg-music] 音频加载失败: ${e.src}`);
             }, this);
 

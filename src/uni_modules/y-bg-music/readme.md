@@ -26,7 +26,7 @@ import { useBgMusic } from '@/uni_modules/y-bg-music/js_sdk';
 
 
 const bgmusic = useBgMusic({
-    src: 'https://y-components.netlify.app/static/bgmusic.mp3',
+    src: 'https://y-components.netlify.app/static/music.m4a', // mp3 ogg m4a......
     loop: 999,      // 循环次数
     controls:true   // 显示右上角控制元素 (可以隐藏自己实现)
 });
@@ -53,6 +53,29 @@ weixin.ready(() => {
 1. 播放控制元素太丑
     
     答：可以隐藏的，然后自己写一个替代。
+
+2. 无法播放
+
+    答：检查音乐链接是否可以播放, 另外需要注意跨域问题!
+
+
+
+## 跨域解决
+
+- 对象储存(oss/cos): 设置允许访问地址
+- nginx: 下列规则可以写到 `伪静态` 中
+    ```nginx
+    location / {  
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+        add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+
+        if ($request_method = 'OPTIONS') {
+            return 204;
+        }
+    }
+    ```
+
 
 ## 参考
 
