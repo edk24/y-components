@@ -1,9 +1,10 @@
 <template>
     <view class="desc">
         <text v-if="!isWxBrowser">请使用微信内置浏览器打开～</text>
-        <text v-else>
-            有在播放吗？ 🤨
-        </text>
+        <view v-else>
+            <view>有在播放吗？ 🤨</view>
+            <view>(有时需要等一等, 音频的服务器较差... 慢)</view>
+        </view>
     </view>
 </template>
 
