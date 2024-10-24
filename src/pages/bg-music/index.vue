@@ -17,7 +17,7 @@ const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent))
 let bgmusic: any = null;
 try {
     bgmusic = useBgMusic({
-        src: 'https://bate.www.ioi.plus/music.m4a',
+        src: 'https://bate.www.ioi.plus/woc.mp3',
         // src: 'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
         loop: 999,
         controls: true

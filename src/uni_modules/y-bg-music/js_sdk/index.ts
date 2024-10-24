@@ -100,14 +100,16 @@ class BgMusicAndroid implements IBgMusic {
         // 动态加载音频库
         script.onload = () => {
             // 注册音频加载完成事件
+            createjs.Sound.registerPlugins([createjs.WebAudioPlugin]);
             createjs.Sound.alternateExtensions = ['mp3', 'm4a', 'ogg', 'wav', 'mp4'];
             createjs.Sound.on('fileload', () => {
                 this.musicLoadComplete = true;
-            }, window);
+            }, this);
             createjs.Sound.on('fileerror', (e:any) => {
                 console.error(`[y-bg-music] 音频加载失败: ${e.src}`, e);
+                console.log(JSON.stringify(e));
                 throw new Error(`[y-bg-music] 音频加载失败: ${e.src}`);
-            }, window);
+            }, this);
 
             // 注册音频
             createjs.Sound.registerSound(options.src, 'sound');
@@ -209,7 +211,7 @@ export const useBgMusic = (options: BgMusicOptions) => {
 
     let player: IBgMusic | null = null;
     if (isAndroid()) {
-        player = new BgMusicAndroid2();
+        player = new BgMusicAndroid();
         player.init(options);
     } else if (isIos()) {
         player = new BgMusicIos();
