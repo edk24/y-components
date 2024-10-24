@@ -26,7 +26,7 @@ import { useBgMusic } from '@/uni_modules/y-bg-music/js_sdk';
 
 
 const bgmusic = useBgMusic({
-    src: 'https://y-components.netlify.app/static/music.m4a', // mp3 ogg m4a......
+    src: 'https://y-components.netlify.app/static/bg.mp3', // mp3 ogg......
     loop: 999,      // 循环次数
     controls:true   // 显示右上角控制元素 (可以隐藏自己实现)
 });

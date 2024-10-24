@@ -17,7 +17,7 @@ const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent))
 let bgmusic: any = null;
 try {
     bgmusic = useBgMusic({
-        src: 'https://y-components.netlify.app/static/music.m4a',
+        src: 'https://y-components.netlify.app/static/bg.mp3',
         // src: 'https://bate.www.ioi.plus/music.m4a',
         // src: 'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
         loop: 999,

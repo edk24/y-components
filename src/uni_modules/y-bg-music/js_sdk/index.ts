@@ -49,7 +49,7 @@ class BgMusicAndroid implements IBgMusic {
         script.onload = () => {
             // 注册音频加载完成事件
             createjs.Sound.registerPlugins([createjs.WebAudioPlugin]);
-            createjs.Sound.alternateExtensions = ['mp3', 'm4a', 'ogg', 'wav', 'mp4'];
+            createjs.Sound.alternateExtensions = ['mp3', 'ogg', 'wav', 'mp4'];
             createjs.Sound.on('fileload', () => {
                 this.musicLoadComplete = true;
             }, this);
