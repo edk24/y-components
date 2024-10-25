@@ -48,10 +48,17 @@ const items = ref([
     },
     // #endif
     {
-        title: '自定义小程序导航栏',
+        title: '自定义导航栏',
         desc: 'y-navigation',
         to: '/pages/navigation/index'
-    }
+    },
+	// #ifdef APP-PLUS
+	{
+		title: '自定义导航栏/nvue',
+		desc: 'y-navigation',
+		to: '/pages/navigation/test'
+	}
+	// #endif
 ])
 </script>
 
