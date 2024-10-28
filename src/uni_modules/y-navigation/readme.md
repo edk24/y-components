@@ -9,6 +9,8 @@
 
 <br>
 
+支持 `nvue`
+
 🌈 TypeScript + Vue3
 
 > 开发这个组件的初衷
@@ -18,44 +20,50 @@
 有其他需求可联系我, 接php全栈开发 / 前端开发 (微信: Base1024)
 
 
-## Examples
+## 示例代码
 
 ```vue
 <template>
     <!-- 正常 -->
-    <y-navigation  background="#456dea">
-        客户列表
-    </y-navigation>
+    <y-navigation  background="#456dea" title="客户列表" />
 
-    <!-- 透明 -->
+    <!-- 透明 | 使用插槽 -->
     <y-navigation  :background="'transparent'">
         我的二维码
     </y-navigation>
 
     <!-- 渐变色 -->
-    <y-navigation background="linear-gradient(135deg,#ee9ae5,#5961f9)" >
-        用户列表
-    </y-navigation>
+    <y-navigation background="linear-gradient(135deg,#ee9ae5,#5961f9)" title="用户列表" />
+
+    <!-- 使用图片作为背景, !!! nvue不支持渐变色  可使用背景图替代 -->
+    <y-navigation :backgroundImage="navBg" color="black" :fixed="true" title="用户列表" />
 </template>
+
+<script lang="ts" setup>
+import navBg from '../../static/navbar-bg.png';
+</script>
 ```
 
-## Props
-
-> 参数
+## 参数
 
 | 参数名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |
 | showBack | boolean | `true` | 显示返回按钮, `showBack && 有上一页`  才显示 |
 | color | string | `white` | 文字颜色，取值范围：`white` \| `black` |
-| background | string | `linear-gradient(135deg, #0498FB 0%, #5359EE 100%)` | 背景色，允许使用渐变色，rgba，hex 以及透明`transparent`等 |
+| backgroundColor | string | `linear-gradient(135deg, #0498FB 0%, #5359EE 100%)` | 背景色，允许使用渐变色，rgba，hex 以及透明`transparent`等 |
+| backgroundImage | string | - | 支持图片路径和 import 的图片, 建议用 import 不闪 |
 | fontSize | string \| number | `34rpx` | 标题文字大小,输入 number 默认单位 rpx |
 | fixed | boolean | `true` | 是否固定在顶部 |
+| title | string | - | 导航栏标题 |
 
-## Slot
-
-> 插槽
+## 插槽
 
 | name | 作用 |
 | --- | --- |
 | default | 导航栏标题 |
 | extend | 右侧扩展内容区域 |
+
+## 常见问题
+
+1. 渐变色在 `nvue` 页面中无效
+    答: nvue 不支持渐变色, 可以设置背景图片替代

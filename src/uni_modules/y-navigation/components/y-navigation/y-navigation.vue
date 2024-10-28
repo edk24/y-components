@@ -1,16 +1,25 @@
 <template>
-    <!-- <view  style="width: 100%; background-color: red; height: 20px;"></view> -->
-    <view :class="classList" :style="styleList">
-        <view class="y-navigation__status-bar"></view>
-        <view class="y-navigation__body">
-            <view class="y-navigation__body-back" @tap="handleBack">
-                <uni-icons type="left" size="24" :color="color" v-if="hasPrevPage"></uni-icons>
-            </view>
-            <view class="y-navigation__body-title">
-                <slot></slot>
-            </view>
-            <view class="y-navigation__body-extend">
-                <slot name="extend"></slot>
+    <view :class="classList" :style="containterStyle">
+        <image v-if="backgroundImage" :src="backgroundImage" :style="bgStyle" mode="aspectFill"></image>
+
+        <view class="y-navigation__main">
+            <view class="y-navigation__status-bar" :style="statusBarStyle"></view>
+            <view class="y-navigation__body" :style="navigationBarStyle">
+                <view class="y-navigation__body-back" @tap="handleBack">
+                    <uni-icons type="left" size="24" :color="color" v-if="hasPrevPage"></uni-icons>
+                </view>
+                <view class="y-navigation__body-title" :style="titleStyle">
+                    <template v-if="title">
+                        <text :style="titleStyle">{{ title }}</text>
+                    </template>
+
+                    <template v-else>
+                        <slot></slot>
+                    </template>
+                </view>
+                <view class="y-navigation__body-extend">
+                    <slot name="extend"></slot>
+                </view>
             </view>
         </view>
     </view>
@@ -39,21 +48,25 @@ navigationBarInfo = {
 
 interface Props {
     // 是否显示返回按钮
-    showBack: boolean;
+    showBack?: boolean;
     // 字体颜色
-    color: 'white' | 'black';
+    color?: 'white' | 'black';
     // 背景颜色，支持背景色、渐变色
-    background: string;
+    backgroundColor?: string;
+    // 背景图片
+    backgroundImage?: string;
     // 字体大小, 仅 custom 类型生效
-    fontSize: string | number;
+    fontSize?: string | number;
     // 是否固定在顶部
     fixed: boolean;
+    // 导航栏名称
+    title?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     showBack: true,
     color: 'black',
-    background: 'linear-gradient(135deg, #0498FB 0%, #5359EE 100%)',
+    backgroundColor: 'linear-gradient(135deg, #0498FB 0%, #5359EE 100%)',
     fontSize: '30rpx',
     fixed: true
 })
@@ -69,15 +82,46 @@ const classList = computed(() => {
     return list;
 })
 
-const styleList = computed(() => {
+const containterStyle = computed(() => {
     let style: AnyObject = {
-        '--y-navigation-bar-background': props.background,
-        '--y-navigation-bar-color': props.color,
-        '--y-navigation-status-bar-height': `${navigationBarInfo.statusBarHeight}px`,
-        '--y-navigation-height': `${navigationBarInfo.navigationHeight}px`,
-        '--y-navigation-font-size': props.fontSize + (typeof props.fontSize === 'number' ? 'rpx' : ''),
+        'background-image': props.backgroundColor,
+        'height': (navigationBarInfo.navigationHeight + navigationBarInfo.statusBarHeight) + 'px',
     }
     return style
+})
+
+
+const bgStyle = computed(() => {
+    return {
+        width: '100%',
+        height: '100%',
+    }
+})
+
+const statusBarStyle = computed(() => {
+    return {
+        height: navigationBarInfo.statusBarHeight + 'px',
+    }
+})
+
+const navigationBarStyle = computed(() => {
+    return {
+        height: navigationBarInfo.navigationHeight + 'px',
+    }
+})
+
+const titleStyle = computed(() => {
+    let style: AnyObject = {
+        fontSize: props.fontSize + (typeof props.fontSize === 'number' ? 'rpx' : ''),
+        color: props.color,
+        fontWeight: 'normal'
+    }
+
+    // #ifdef MP
+    style['fontWeight'] = 'bold';
+    // #endif
+
+    return style;
 })
 
 // 是否有上一页

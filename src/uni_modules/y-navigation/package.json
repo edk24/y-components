@@ -1,12 +1,13 @@
 {
   "id": "y-navigation",
   "displayName": "y-navigation 小程序导航栏",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "y-navigation 小程序导航栏, 透明, 渐变导航栏",
   "keywords": [
     "y-navigation",
     "小程序导航栏",
-    "渐变导航栏"
+    "渐变导航栏",
+    "沉浸式导航"
 ],
   "repository": "",
   "engines": {
@@ -50,7 +51,7 @@
         },
         "App": {
           "app-vue": "y",
-          "app-nvue": "u",
+          "app-nvue": "y",
           "app-uvue": "u"
         },
         "H5-mobile": {

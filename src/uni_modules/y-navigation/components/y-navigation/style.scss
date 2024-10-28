@@ -1,14 +1,17 @@
 .y-navigation {
     display: flex;
     flex-direction: column;
-    background-color: blue;
     z-index: 9999;
+    overflow: hidden;
+    position: relative;
 
-    --y-navigation-bar-background: #456dea;
-    --y-navigation-bar-color: white;
-    --y-navigation-status-bar-height: var(--window-top);
-    --y-navigation-font-size: 30rpx;
-    --y-navigation-height: 44px;
+    &__main {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
 
     &__fixed {
         position: sticky;
@@ -17,30 +20,16 @@
 
     &__status-bar {
         width: 100%;
-        height: var(--y-navigation-status-bar-height);
     }
 
-    &__native {
-        background: var(--y-navigation-bar-background);
-        color: var(--y-navigation-bar-color);
-        font-size: var(--y-navigation-font-size);
-    }
 
     &__body {
         display: flex;
+        flex-direction: row;
         box-sizing: border-box;
         z-index: 9999;
         position: relative;
         align-items: center;
-        
-        // 兼容刘海屏
-        // padding-top: 0;
-        // padding-top: constant(safe-area-inset-top);
-        // padding-top: env(safe-area-inset-top);
-
-      
-        height: var(--y-navigation-height);
-
 
         &-back {
             width: 60rpx;
@@ -58,17 +47,19 @@
 
         &-title {
             flex: 1;
-            // #ifdef MP
-            font-weight: 400;
-            // #endif
-
-            // #ifndef MP
-            font-weight: bold;
-            // #endif
 
             text-align: center;
-            color: var(--y-navigation-bar-color);
-            font-size: var(--y-navigation-font-size);
+            justify-content: center;
+
+            display: flex;
+            flex-direction: row;
+
+            text {
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+            }
         }
 
         &-extend {
