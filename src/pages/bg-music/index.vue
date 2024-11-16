@@ -18,8 +18,12 @@ const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent))
 let bgmusic: any = null;
 try {
     bgmusic = useBgMusic({
-        // src: 'https://doc.edk24.com/music.mp3',
-        src: 'https://bate.www.ioi.plus/music.m4a',
+        src: 'https://doc.edk24.com/music.mp3',
+        // src: 'https://doc.edk24.com/music.m4a',
+        // src: 'https://yinliancaiyi-1314117357.cos.accelerate.myqcloud.com/pajk/static/beijing.mp3',
+        // src:'https://ai-1301258994.cos.ap-guangzhou.myqcloud.com/beijing1.ogg',
+        // src:'https://doc.edk24.com/beijing.ogg',
+        // src: 'https://bate.www.ioi.plus/music.m4a',
         // src: 'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
         loop: 999,
         controls: true

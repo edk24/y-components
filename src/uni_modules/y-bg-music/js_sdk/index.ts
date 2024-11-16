@@ -1,11 +1,10 @@
 import './style.scss'
 
-
 type PLAY_STATE = 'play' | 'pause';
 
 // soundjs loader
 const script = document.createElement('script');
-script.src = 'https://cdn.bootcdn.net/ajax/libs/SoundJS/1.0.2/soundjs.min.js';
+script.src = 'https://cdn.bootcdn.net/ajax/libs/SoundJS/1.0.1/soundjs.min.js';
 script.type = 'text/javascript';
 
 // 控制按钮
@@ -41,6 +40,7 @@ class BgMusicAndroid implements IBgMusic {
     private musicInstance: any = null;
     private musicLoadComplete = false;
     private options: BgMusicOptions | null = null;
+    private firstPlay = false;
 
     init(options: BgMusicOptions) {
         this.options = options;
@@ -48,17 +48,16 @@ class BgMusicAndroid implements IBgMusic {
         // 动态加载音频库
         script.onload = () => {
             // 注册音频加载完成事件
-            createjs.Sound.registerPlugins([createjs.WebAudioPlugin]);
-            createjs.Sound.alternateExtensions = ['mp3', 'ogg', 'wav', 'mp4'];
+            createjs.Sound.alternateExtensions = ['mp3', 'ogg', 'wav'];
             createjs.Sound.on('fileload', () => {
                 this.musicLoadComplete = true;
-            }, this);
+            });
             createjs.Sound.on('fileerror', (e:any) => {
                 throw new Error(`[y-bg-music] 音频加载失败: ${e.src}`);
-            }, this);
+            });
 
             // 注册音频
-            createjs.Sound.registerSound(options.src, 'sound');
+            createjs.Sound.registerSound({ src: options.src, id: 'sound' });
         }
         // 预防重复加载
         if (script.parentElement === null) {
@@ -69,7 +68,7 @@ class BgMusicAndroid implements IBgMusic {
 
     play() {
         // 存在音频实例，直接恢复播放
-        if (this.musicInstance) {
+        if (this.musicInstance && this.firstPlay) {
             this.musicInstance.paused = false;
             controlsDom.classList.add('y-bg-music-controls__player');
             return;
@@ -77,11 +76,12 @@ class BgMusicAndroid implements IBgMusic {
 
         // 不存在音频实例，等待音频加载完成后播放
         const timer = setInterval(() => {
-            if (window.createjs && this.musicLoadComplete) {
+            if (window.createjs && this.musicLoadComplete && this.firstPlay === false) {
                 clearInterval(timer);
                 this.musicInstance = createjs.Sound.play('sound');
                 this.musicInstance.loop = this.options?.loop;
                 controlsDom.classList.add('y-bg-music-controls__player');
+                this.firstPlay = true;
             }
         }, 300);
     }
