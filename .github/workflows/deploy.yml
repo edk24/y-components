@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    branches: 
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      # 设置 node 程序和版本
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+
+      # 安装项目依赖
+      - name: install
+        run: "pnpm install"
+      - name: build
+        run: "pnpm run build:h5"
+
+      # 部署服务器
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v5.1.1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: 'root'
+          SOURCE: 'dist/build/h5/*'
+          TARGET: '/www/wwwroot/y-component.edk24.com/'
+          ARGS: '-rltgoDzvO --delete'
