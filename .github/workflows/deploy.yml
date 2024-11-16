@@ -16,6 +16,8 @@ jobs:
           node-version: '18.x'
 
       # 安装项目依赖
+      - name: pnpm install
+        run: npm install -g pnpm
       - name: install
         run: "pnpm install"
       - name: build
