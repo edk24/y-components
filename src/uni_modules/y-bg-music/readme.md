@@ -82,7 +82,7 @@ location / {
 
 有问题可以直接在评论区反馈，或是联系我，此项目持续维护中...
 
-![联系我](https://doc.edk24.com/static/contact.png)
+![联系我](https://y-component.edk24.com/static/contact.png)
 
 ## 感谢
 
