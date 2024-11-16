@@ -80,11 +80,9 @@ location / {
 
 ## 意见反馈、联系我
 
-绿泡泡：Base1024
+有问题可以直接在评论区反馈，或是联系我，此项目持续维护中...
 
-有问题请反馈, 此 jssdk 持续维护中.
-
-![wx](https://y-component.edk24.com/static/y-bg-music/wx-qrcode.jpg)
+![联系我](https://doc.edk24.com/static/contact.png)
 
 ## 感谢
 
