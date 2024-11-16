@@ -81,10 +81,10 @@ setTimeout(() => {
 
 弹出层默认插槽里套个 `scroll-view` 实现，记得设置宽度和高度；
 
-## 问题反馈
+## 意见反馈、联系我
 
-若在使用过程中发现 BUG，请与我反馈，不胜感激。
+绿泡泡：Base1024
 
-- [去 Github Issues](https://github.com/edk24/y-components/issues)
-- 评论区、插件群里
-- [发邮件 yuxiaobo64@gmail.com](mailto:yuxiaobo64@gmail.com)
+有问题请反馈, 此组件持续维护中.
+
+![wx](https://y-component.edk24.com/static/y-bg-music/wx-qrcode.jpg)

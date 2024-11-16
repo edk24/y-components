@@ -28,7 +28,7 @@ interface IBgMusic {
     /** 获取播放状态 */
     getState: () => PLAY_STATE
     /** 播放 */
-    play: () => void
+    play: () => Promise<void>
     /** 暂停 */
     pause: () => void
     /** 销毁 */
@@ -67,23 +67,28 @@ class BgMusicAndroid implements IBgMusic {
 
 
     play() {
-        // 存在音频实例，直接恢复播放
-        if (this.musicInstance && this.firstPlay) {
-            this.musicInstance.paused = false;
-            controlsDom.classList.add('y-bg-music-controls__player');
-            return;
-        }
-
-        // 不存在音频实例，等待音频加载完成后播放
-        const timer = setInterval(() => {
-            if (window.createjs && this.musicLoadComplete && this.firstPlay === false) {
-                clearInterval(timer);
-                this.musicInstance = createjs.Sound.play('sound');
-                this.musicInstance.loop = this.options?.loop;
+        return new Promise<void>((resolve) => {
+            // 存在音频实例，直接恢复播放
+            if (this.musicInstance && this.firstPlay) {
+                this.musicInstance.paused = false;
                 controlsDom.classList.add('y-bg-music-controls__player');
-                this.firstPlay = true;
+                resolve();
+                return;
             }
-        }, 300);
+
+
+            // 不存在音频实例，等待音频加载完成后播放
+            const timer = setInterval(() => {
+                if (window.createjs && this.musicLoadComplete && this.firstPlay === false) {
+                    clearInterval(timer);
+                    this.musicInstance = createjs.Sound.play('sound');
+                    this.musicInstance.loop = this.options?.loop;
+                    controlsDom.classList.add('y-bg-music-controls__player');
+                    this.firstPlay = true;
+                    resolve();
+                }
+            }, 300);
+        })
     }
 
     pause() {
@@ -121,8 +126,13 @@ class BgMusicIos implements IBgMusic {
     }
 
     play() {
-        this.audioDom?.play();
-        controlsDom.classList.add('y-bg-music-controls__player');
+        return new Promise<void>((resolve) => {
+            this.audioDom?.play()
+                .then(() => {
+                    resolve();
+                    controlsDom.classList.add('y-bg-music-controls__player');
+                });
+        })
     }
 
     pause() {

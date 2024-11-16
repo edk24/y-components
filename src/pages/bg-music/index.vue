@@ -1,9 +1,15 @@
 <template>
     <view class="desc">
-        <text v-if="!isWxBrowser">请使用微信内置浏览器打开～</text>
-        <view v-else>
-            <view>有在播放吗？ 🤨</view>
-            <view>(有时需要等一等, 音频的服务器较差... 慢)</view>
+        <view v-if="!isWxBrowser">请使用微信内置浏览器打开～</view>
+        <view v-else
+            style="flex:1;display: flex; flex-direction: column; gap: 50rpx; justify-content: center; align-items: center;">
+            <view v-if="!playing">有在播放吗？ 🤨</view>
+            <view v-else
+                style="width:300rpx; display: flex; flex-direction: column; justify-content: center; gap:50rpx; align-items: center;">
+                <image src="../../static/gif/1.gif" style="width:300rpx;" mode="widthFix"></image>
+                <image src="../../static/gif/2.gif" style="width:300rpx;" mode="widthFix"></image>
+                <image src="../../static/gif/3.gif" style="width:300rpx;" mode="widthFix"></image>
+            </view>
         </view>
     </view>
 </template>
@@ -16,10 +22,12 @@ import weixin from 'weixin-js-sdk';
 
 const isWxBrowser = ref(/micromessenger/i.test(navigator.userAgent))
 let bgmusic: any = null;
+const playing = ref(false);
+
 try {
     bgmusic = useBgMusic({
-        src: 'https://doc.edk24.com/music.mp3',
-        // src: 'https://doc.edk24.com/music.m4a',
+        // src: 'https://doc.edk24.com/music.mp3',
+        src: 'https://y-component.edk24.com/static/gxfc.mp3',
         // src: 'https://yinliancaiyi-1314117357.cos.accelerate.myqcloud.com/pajk/static/beijing.mp3',
         // src:'https://ai-1301258994.cos.ap-guangzhou.myqcloud.com/beijing1.ogg',
         // src:'https://doc.edk24.com/beijing.ogg',
@@ -29,7 +37,7 @@ try {
         controls: true
     });
 } catch (error:any) {
-    alert(error.message  | error.msg | error)
+    // alert(error.message  | error.msg | error)
 }
 
 
@@ -44,7 +52,10 @@ weixin.config({
 });
 
 weixin.ready(() => {
-    bgmusic.play();
+    bgmusic.play()
+        .then(() => {
+         playing.value = true;
+        });
 });
 // #endif
 </script>
@@ -56,6 +67,9 @@ weixin.ready(() => {
     margin-top: 50rpx;
     font-size: 34rpx;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 20rpx;
 }
 
 body {

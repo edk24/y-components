@@ -76,3 +76,11 @@ function handleSubmit(data: any) {
 | :--- | :--- |
 | title | 标题 |
 | desc | 描述 |
+
+## 意见反馈、联系我
+
+绿泡泡：Base1024
+
+有问题请反馈, 此组件持续维护中.
+
+![wx](https://y-component.edk24.com/static/y-bg-music/wx-qrcode.jpg)

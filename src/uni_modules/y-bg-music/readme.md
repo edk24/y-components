@@ -10,7 +10,7 @@
 
 ## 演示效果
 
-![alt text](https://y-components.edk24.com/static/y-bg-music/demo.png)
+![alt text](https://y-component.edk24.com/static/y-bg-music/demo.png)
 
 使用微信扫一扫查看效果
 
@@ -84,4 +84,14 @@ location / {
 
 有问题请反馈, 此 jssdk 持续维护中.
 
-![wx](https://y-components.edk24.com/static/y-bg-music/wx-qrcode.jpg)
+![wx](https://y-component.edk24.com/static/y-bg-music/wx-qrcode.jpg)
+
+## 感谢
+
+❤️ 感谢所有对项目进行捐助和支持的朋友们～
+
+下面是捐助名单，按时间排序
+
+| 捐助时间 | 捐助内容 | 捐助者 |
+| :--- | :---: | :--- |
+| 2024/11/16 |  66.00 | 郑智文 |
