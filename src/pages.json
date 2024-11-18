@@ -38,6 +38,12 @@
 				"navigationStyle": "custom",
 				"navigationBarTitleText" : "nvue test"
 			}
+		},
+		{
+			"path": "pages/fullpage/index",
+			"style": {
+				"navigationBarTitleText": "整屏滚动"
+			}
 		}
 	],
 	"globalStyle": {

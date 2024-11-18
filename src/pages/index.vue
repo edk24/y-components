@@ -46,6 +46,11 @@ const items = ref([
         desc: 'y-bg-music',
         to: '/pages/bg-music/index'
     },
+    {
+        title: '整屏滚动',
+        desc: 'y-fullpage',
+        to: '/pages/fullpage/index'
+    },
     // #endif
     {
         title: '自定义导航栏',
