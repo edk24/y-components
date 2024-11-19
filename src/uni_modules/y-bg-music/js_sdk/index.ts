@@ -48,15 +48,19 @@ class BgMusicAndroid implements IBgMusic {
         // 动态加载音频库
         script.onload = () => {
             // 注册音频加载完成事件
+            // @ts-ignore
             createjs.Sound.alternateExtensions = ['mp3', 'ogg', 'wav'];
+            // @ts-ignore
             createjs.Sound.on('fileload', () => {
                 this.musicLoadComplete = true;
             });
+            // @ts-ignore
             createjs.Sound.on('fileerror', (e:any) => {
                 throw new Error(`[y-bg-music] 音频加载失败: ${e.src}`);
             });
 
             // 注册音频
+            // @ts-ignore
             createjs.Sound.registerSound({ src: options.src, id: 'sound' });
         }
         // 预防重复加载
@@ -79,8 +83,10 @@ class BgMusicAndroid implements IBgMusic {
 
             // 不存在音频实例，等待音频加载完成后播放
             const timer = setInterval(() => {
+                // @ts-ignore
                 if (window.createjs && this.musicLoadComplete && this.firstPlay === false) {
                     clearInterval(timer);
+                    // @ts-ignore
                     this.musicInstance = createjs.Sound.play('sound');
                     this.musicInstance.loop = this.options?.loop;
                     controlsDom.classList.add('y-bg-music-controls__player');
@@ -165,16 +171,14 @@ export const useBgMusic = (options: BgMusicOptions) => {
         options.loop = 999;
     }
 
-    let player: IBgMusic | null = null;
+    let player: any = null;
     if (isAndroid()) {
         player = new BgMusicAndroid();
         player.init(options);
-    } else if (isIos()) {
+    } else {
         player = new BgMusicIos();
         player.init(options);
-    } else {
-        throw new Error('[y-bg-music] 不支持的设备');
-    }
+    } 
 
 
     // 控制按钮
