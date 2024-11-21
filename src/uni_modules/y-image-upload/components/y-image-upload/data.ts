@@ -13,8 +13,10 @@ export interface YImageUploadProps {
     count?: number;
     // 图片资源
     modelValue: string[] | string;
-    // 域名
-    domain?: string;
+    // 基础域名
+    baseUrl?: string;
+    // 上传接口地址
+    uploadUrl?: string;
     // 图片后缀，如阿里 oss 缩略图 ?x-oss-process=image/resize,m_fill,w_100,h_100
     suffix?: string;
     // 上传处理
@@ -27,8 +29,8 @@ export interface YImageUploadProps {
     sizeLimit?: number;
     // 文件格式限制，如：image/jpeg,image/png
     accept?: string;
-    // 幽灵模式 （不可见， 点击处理上传但是不回显，交由用户自行渲染显示）
-    ghost?: boolean;
+    // 禁用模式 （不可见， 点击处理上传但是不回显，交由用户自行渲染显示）
+    disabled?: boolean;
     // 图片渲染模式 (拉伸、填充)
     imageMode: 'aspectFit' | 'aspectFill';
 }
