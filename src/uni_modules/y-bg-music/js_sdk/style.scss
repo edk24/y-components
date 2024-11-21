@@ -22,6 +22,7 @@
     &__show {
         opacity: 1;
         pointer-events: auto;
+        z-index: 999999999;
     }
 
     &__player {

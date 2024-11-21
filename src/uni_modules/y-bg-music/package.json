@@ -1,7 +1,7 @@
 {
   "id": "y-bg-music",
   "displayName": "微信H5自动播放背景音乐，无需触摸点击",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "使用微信内置浏览器打开，背景音乐将自动播放，无需任何操作",
   "keywords": [
     "y-bg-music",
