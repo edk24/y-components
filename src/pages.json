@@ -1,48 +1,53 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-	{
-		"path":"pages/index",
-		"style": {
-			"navigationBarTitleText": "首页"
-		}
-	},
-	{
+		{
+			"path": "pages/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
 			"path": "pages/drawer/index",
 			"style": {
 				"navigationBarTitleText": "drawer Test"
 			}
 		},
 		{
-			"path":"pages/user-profile/index",
+			"path": "pages/user-profile/index",
 			"style": {
 				"navigationBarTitleText": "user-profile Test"
 			}
 		},
 		{
-			"path":"pages/bg-music/index",
-			"style":{
+			"path": "pages/bg-music/index",
+			"style": {
 				"navigationBarTitleText": "bg-music Test"
 			}
 		},
 		{
 			"path": "pages/navigation/index",
 			"style": {
-			"navigationStyle": "custom",
+				"navigationStyle": "custom",
 				"navigationBarTitleText": "navigation Test"
 			}
 		},
 		{
-			"path" : "pages/navigation/test",
-			"style" : 
-			{
+			"path": "pages/navigation/test",
+			"style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText" : "nvue test"
+				"navigationBarTitleText": "nvue test"
 			}
 		},
 		{
 			"path": "pages/fullpage/index",
 			"style": {
 				"navigationBarTitleText": "整屏滚动"
+			}
+		},
+		{
+			"path": "pages/image-upload/index",
+			"style": {
+				"navigationBarTitleText": "image-upload"
 			}
 		}
 	],

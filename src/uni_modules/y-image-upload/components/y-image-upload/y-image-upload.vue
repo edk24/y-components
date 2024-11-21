@@ -3,27 +3,25 @@
     <view class="y-image-upload">
         <!-- 单图上传 -->
         <template v-if="!props.multiple">
-            <div class="y-image-upload__item">
+            <div class="y-image-upload__item" @tap="handleItemClick([modelValue.toString()], 0)">
                 <template v-if="modelValue.toString() != ''">
-                    <image mode="aspectFill" @tap="handleItemClick([modelValue.toString()], 0)" />
+                    <image mode="aspectFill" />
                     <view class="y-image-upload__item__delete" v-if="props.allowDelete"
                         @click="emit('update:modelValue', '')">
                         <text>删除</text>
                     </view>
                 </template>
-                
+
                 <template v-else>
-
+                    <uni-icons type="plusempty" color="#A6A6A6" size="28"></uni-icons>
+                    <view class="y-image-upload__item-placeholder">上传图片</view>
                 </template>
-
             </div>
         </template>
 
         <!-- 多图上传 -->
         <template v-else-if="props.multiple">
-            <view class="y-image-upload__list">
-
-            </view>
+            
         </template>
 
         <!-- 块级样式 -->
@@ -38,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { YImageUploadProps } from './data';
+import type { YImageUploadProps } from './data';
 
 const props = withDefaults(defineProps<YImageUploadProps>(), {
     allowDelete:  true,

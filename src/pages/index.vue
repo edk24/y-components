@@ -62,8 +62,13 @@ const items = ref([
 		title: '自定义导航栏/nvue',
 		desc: 'y-navigation',
 		to: '/pages/navigation/test'
-	}
-	// #endif
+	},
+    // #endif
+    {
+        title: '图片上传',
+        desc: 'y-image-upload',
+        to: '/pages/image-upload/index'
+    }
 ])
 </script>
 
