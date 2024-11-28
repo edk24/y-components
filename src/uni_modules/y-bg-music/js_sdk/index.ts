@@ -20,6 +20,10 @@ type BgMusicOptions = {
     loop?: number
     /** 控制按钮 */
     controls?: boolean
+    /** 自定义图标style */
+    customStyle?: Partial<CSSStyleDeclaration>
+    /** 自定义图标 */
+    customIcon?: string
 }
 
 
@@ -183,7 +187,20 @@ export const useBgMusic = (options: BgMusicOptions) => {
 
     // 控制按钮
     if (controlsDom.parentElement === null) {
+        // 自定义图标
+        if (options.customIcon) {
+            controlsDom.innerHTML = options.customIcon;
+        }
+
         document.body.appendChild(controlsDom);
+
+        // 自定义样式
+        if (controlsDom && options.customStyle && Object.keys(options.customStyle).length > 0) {
+            const customStyle = options.customStyle as CSSStyleDeclaration;
+            for (const k in customStyle) {
+                controlsDom.style.setProperty(k, customStyle[k]);
+            }
+        }
 
         if (options.controls) {
             controlsDom.classList.add('y-bg-music-controls__show');

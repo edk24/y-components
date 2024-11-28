@@ -34,7 +34,10 @@ try {
         // src: 'https://bate.www.ioi.plus/music.m4a',
         // src: 'https://superzdd.github.io/wechat-h5-backgound-music-survey/bgmusic.mp3',
         loop: 999,
-        controls: true
+        controls: true,
+        customStyle: {
+            
+        }
     });
 } catch (error:any) {
     // alert(error.message  | error.msg | error)
