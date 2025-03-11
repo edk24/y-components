@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
-      # 设置 node 程序和版本
+      # 设置 node 程序
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
