@@ -30,6 +30,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: 'root'
+          REMOTE_PORT: '26535'
           SOURCE: 'dist/build/h5/*'
           TARGET: '/www/wwwroot/y-component.edk24.com/'
           ARGS: '-rltgoDzvO --delete'
